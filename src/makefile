@@ -6,8 +6,8 @@ JC = javac
 
 CLASSES = \
         packet.java \
-        Receiver.java \
-        Main.java 
+        receiver.java \
+        Receiver_Class.java
 
 default: classes
 

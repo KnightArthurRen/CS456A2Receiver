@@ -6,7 +6,7 @@ import java.net.InetAddress;
 /**
  * Created by renyi on 2018-03-12.
  */
-public class Receiver {
+public class Receiver_Class {
     private InetAddress emulator_ip;
     private int emulator_port, reciver_port,last_seq;
     private DatagramSocket socket;
@@ -18,7 +18,7 @@ public class Receiver {
         try {
             output.write(data);
         } catch(java.io.IOException e) {
-            System.err.println("Receiver: failed to save data!");
+            System.err.println("Receiver_Class: failed to save data!");
         }
     }
     private void log(int seqnum) {
@@ -27,7 +27,7 @@ public class Receiver {
         try {
             arrival.write(log);
         } catch (java.io.IOException e) {
-            System.err.println("Receiver: failed to log!");
+            System.err.println("Receiver_Class: failed to log!");
         }
 
     }
@@ -38,15 +38,15 @@ public class Receiver {
                 DatagramPacket binary = new DatagramPacket(old_ack.getUDPdata(), old_ack.getUDPdata().length,emulator_ip,emulator_port);
                 socket.send(binary);
             } catch (java.io.IOException e) {
-                System.err.println("Receiver: cannot send old_ack!");
+                System.err.println("Receiver_Class: cannot send old_ack!");
             }
         } catch (java.lang.Exception e ) {
-            System.err.println("Receiver: cannot create old_ack package");
+            System.err.println("Receiver_Class: cannot create old_ack package");
         }
     }
 
 //    Constructor
-    public Receiver(InetAddress emulator_ip, int emulator_port, int reciver_port, String output_file_name) {
+    public Receiver_Class(InetAddress emulator_ip, int emulator_port, int reciver_port, String output_file_name) {
         this.emulator_ip = emulator_ip;
         this.emulator_port = emulator_port;
         this.reciver_port = reciver_port;
@@ -56,7 +56,7 @@ public class Receiver {
         try {
             socket = new DatagramSocket(reciver_port);
         } catch (java.net.SocketException e) {
-            System.err.println("Receiver: cannot create socket");
+            System.err.println("Receiver_Class: cannot create socket");
         }
 
         byte [] buff = new byte[1000];
@@ -67,7 +67,7 @@ public class Receiver {
             output = new FileWriter(output_file_name);
             arrival = new FileWriter("arrival.log");
         } catch (java.io.IOException e) {
-            System.err.println("Receiver: cannot create output files");
+            System.err.println("Receiver_Class: cannot create output files");
         }
 
 //        Start the infinite loop
@@ -76,13 +76,13 @@ public class Receiver {
             try {
                 socket.receive(buffer);
             } catch (java.io.IOException e) {
-                System.err.println("Receiver: cannot receive package!");
+                System.err.println("Receiver_Class: cannot receive package!");
             }
 //            Parse the package
             try{
                 received_packet = packet.parseUDPdata(buffer.getData());
             } catch (java.lang.Exception e) {
-                System.err.println("Receiver: cannot parse package");
+                System.err.println("Receiver_Class: cannot parse package");
             }
 //            Check the package
 //            Check if it's EOT
@@ -91,7 +91,7 @@ public class Receiver {
                 try {
                     socket.send(binary);
                 } catch (java.io.IOException e) {
-                    System.err.println("Receiver: failed to send EOT");
+                    System.err.println("Receiver_Class: failed to send EOT");
                 }
                 break;
             }
