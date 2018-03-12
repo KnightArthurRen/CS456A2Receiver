@@ -33,6 +33,7 @@ public class Receiver_Class {
     }
     private void send_ack() {
         try {
+            System.out.println("start send ack");
             packet old_ack = packet.createACK(last_seq);
             try {
                 DatagramPacket binary = new DatagramPacket(old_ack.getUDPdata(), old_ack.getUDPdata().length,emulator_ip,emulator_port);
@@ -40,6 +41,7 @@ public class Receiver_Class {
             } catch (java.io.IOException e) {
                 System.err.println("Receiver_Class: cannot send old_ack!");
             }
+            System.out.println("ack send successful");
         } catch (java.lang.Exception e ) {
             System.err.println("Receiver_Class: cannot create old_ack package");
         }
@@ -51,7 +53,7 @@ public class Receiver_Class {
         this.emulator_port = emulator_port;
         this.reciver_port = reciver_port;
         this.last_seq = -1;
-
+        System.out.println("Constructor called");
 //        Build the socket
         try {
             socket = new DatagramSocket(reciver_port);
@@ -74,6 +76,7 @@ public class Receiver_Class {
         while(true) {
 //            Receive the package
             try {
+                System.out.println("package received");
                 socket.receive(buffer);
             } catch (java.io.IOException e) {
                 System.err.println("Receiver_Class: cannot receive package!");
@@ -113,6 +116,7 @@ public class Receiver_Class {
                 save_data(received_packet.getData().toString());
                 last_seq = received_packet.getSeqNum();
                 send_ack();
+                System.out.println("Ack send");
             }
         }
     }
