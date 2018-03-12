@@ -76,8 +76,8 @@ public class Receiver_Class {
         while(true) {
 //            Receive the package
             try {
-                System.out.println("package received");
                 socket.receive(buffer);
+                System.out.println("package received");
             } catch (java.io.IOException e) {
                 System.err.println("Receiver_Class: cannot receive package!");
             }
