@@ -93,16 +93,17 @@ public class Receiver_Class {
                 System.out.println("EOT received");
                 try{
                     packet eot_ack = packet.createEOT(received_packet.getSeqNum());
+                    DatagramPacket binary = new DatagramPacket(eot_ack.getUDPdata(), eot_ack.getUDPdata().length,emulator_ip,emulator_port);
+                    try {
+                        socket.send(binary);
+                        System.out.println("EOT send!!!");
+                    } catch (java.io.IOException e) {
+                        System.err.println("Receiver_Class: failed to send EOT");
+                    }
                 } catch (java.lang.Exception e) {
                     System.err.println("Receiver_Class: cannot make EOT package");
                 }
-                DatagramPacket binary = new DatagramPacket(received_packet.getUDPdata(), received_packet.getUDPdata().length,emulator_ip,emulator_port);
-                try {
-                    socket.send(binary);
-                    System.out.println("EOT send!!!");
-                } catch (java.io.IOException e) {
-                    System.err.println("Receiver_Class: failed to send EOT");
-                }
+
                 break;
             }
 //            If regular package, check seq number
