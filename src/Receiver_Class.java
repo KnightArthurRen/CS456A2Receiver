@@ -99,6 +99,7 @@ public class Receiver_Class {
                 DatagramPacket binary = new DatagramPacket(received_packet.getUDPdata(), received_packet.getUDPdata().length,emulator_ip,emulator_port);
                 try {
                     socket.send(binary);
+                    System.out.println("EOT send!!!");
                 } catch (java.io.IOException e) {
                     System.err.println("Receiver_Class: failed to send EOT");
                 }
