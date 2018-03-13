@@ -108,7 +108,9 @@ public class Receiver_Class {
 //            If it's the first ever received package
 //            If the first package is wrong, no ack is received
 //            If the first package is correct, update seq and log
-            if(last_seq == -1 && received_packet.getSeqNum() != 0) break;
+            if(last_seq == -1 && received_packet.getSeqNum() != 0) {
+                continue;
+            }
             if(last_seq +1 % 32 != received_packet.getSeqNum()) {
 //                If not expected package, drop it and send ack of last package
                 System.out.println("duplicate, resend ack");
@@ -116,6 +118,7 @@ public class Receiver_Class {
             } else {
 //                If it's expected, write down the data, update seq and send ack
 //                Write down data
+                System.out.println("received regular pacakge");
                 log(received_packet.getSeqNum());
                 save_data( new String(received_packet.getData()));
                 last_seq = received_packet.getSeqNum();
