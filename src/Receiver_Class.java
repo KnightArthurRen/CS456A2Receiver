@@ -106,12 +106,9 @@ public class Receiver_Class {
             }
 //            If regular package, check seq number
 //            If it's the first ever received package
-            if(last_seq == -1) {
-//                If the first package is wrong, no ack is received
-                if(received_packet.getSeqNum() != 0) break;
-//                If the first package is correct, update seq and log
-                last_seq = 0;
-            }
+//            If the first package is wrong, no ack is received
+//            If the first package is correct, update seq and log
+            if(last_seq == -1 && received_packet.getSeqNum() != 0) break;
             if(last_seq +1 % 32 != received_packet.getSeqNum()) {
 //                If not expected package, drop it and send ack of last package
                 send_ack();
