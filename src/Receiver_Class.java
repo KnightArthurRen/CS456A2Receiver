@@ -111,8 +111,8 @@ public class Receiver_Class {
                 if(received_packet.getSeqNum() != 0) break;
 //                If the first package is correct, update seq and log
                 last_seq = 0;
-                send_ack();
-            } else if(last_seq +1 % 32 != received_packet.getSeqNum()) {
+            }
+            if(last_seq +1 % 32 != received_packet.getSeqNum()) {
 //                If not expected package, drop it and send ack of last package
                 send_ack();
             } else {
