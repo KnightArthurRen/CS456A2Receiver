@@ -115,6 +115,7 @@ public class Receiver_Class {
             if(last_seq +1 % 32 != received_packet.getSeqNum()) {
 //                If not expected package, drop it and send ack of last package
                 System.out.println("duplicate, resend ack");
+                System.out.format("received packet is %f, \n", received_packet.getSeqNum());
                 log(received_packet.getSeqNum());
                 send_ack();
             } else {
