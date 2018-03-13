@@ -109,6 +109,7 @@ public class Receiver_Class {
 //            If the first package is wrong, no ack is received
 //            If the first package is correct, update seq and log
             if(last_seq == -1 && received_packet.getSeqNum() != 0) {
+                System.out.println("First pacakge has problem!!!!");
                 continue;
             }
             if(last_seq +1 % 32 != received_packet.getSeqNum()) {
