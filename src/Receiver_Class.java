@@ -125,5 +125,13 @@ public class Receiver_Class {
                 System.out.println("Ack send");
             }
         }
+//        After finished, close the log file writers
+        try{
+            arrival.close();
+            output.close();
+        } catch (java.io.IOException e) {
+            System.err.println("Receiver_Class: cannot close file writers");
+        }
+
     }
 }
