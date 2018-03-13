@@ -90,7 +90,13 @@ public class Receiver_Class {
 //            Check the package
 //            Check if it's EOT
             if(received_packet.getType() == 2) {
-                DatagramPacket binary = new DatagramPacket(received_packet.getData(), received_packet.getData().length,emulator_ip,emulator_port);
+                System.out.println("EOT received");
+                try{
+                    packet eot_ack = packet.createEOT(received_packet.getSeqNum());
+                } catch (java.lang.Exception e) {
+                    System.err.println("Receiver_Class: cannot make EOT package");
+                }
+                DatagramPacket binary = new DatagramPacket(received_packet.getUDPdata(), received_packet.getUDPdata().length,emulator_ip,emulator_port);
                 try {
                     socket.send(binary);
                 } catch (java.io.IOException e) {
