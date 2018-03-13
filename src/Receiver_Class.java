@@ -118,7 +118,7 @@ public class Receiver_Class {
                 System.out.print("received packet is ");
                 System.out.println(received_packet.getSeqNum());
                 System.out.print("Expected packet is");
-                System.out.println(last_seq);
+                System.out.println(last_seq +1 % 32);
                 log(received_packet.getSeqNum());
                 send_ack();
             } else {
