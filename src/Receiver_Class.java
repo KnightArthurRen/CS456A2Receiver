@@ -117,6 +117,8 @@ public class Receiver_Class {
                 System.out.println("duplicate, resend ack");
                 System.out.print("received packet is ");
                 System.out.println(received_packet.getSeqNum());
+                System.out.print("Expected packet is");
+                System.out.println(last_seq);
                 log(received_packet.getSeqNum());
                 send_ack();
             } else {
