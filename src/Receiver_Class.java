@@ -119,7 +119,7 @@ public class Receiver_Class {
 //                If it's expected, write down the data, update seq and send ack
 //                Write down data
                 log(received_packet.getSeqNum());
-                save_data(received_packet.getData().toString());
+                save_data( new String(received_packet.getData()));
                 last_seq = received_packet.getSeqNum();
                 send_ack();
                 System.out.println("Ack send");
